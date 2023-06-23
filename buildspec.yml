@@ -6,7 +6,7 @@ phases:
     commands:
       - mvn --version
       - java -version
-      - mvn clean install
+      - mvn clean install -X
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
