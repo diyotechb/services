@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserController {
     @Autowired
     private UserService userService;
-    @PostMapping("/request")
+    @PostMapping("/applyJob")
     public User createUser(@RequestParam(value = "firstName") String firstName,
                            @RequestParam(value = "middleName") String middleName,
                            @RequestParam(value = "lastName") String lastName,

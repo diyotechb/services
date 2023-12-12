@@ -13,7 +13,6 @@ public class UserRequest {
     private String firstName;
     private String middleName;
     private String lastName;
-    private String dateOfBirth;
     private String email;
     private String phoneNumber;
     private MultipartFile resume;
