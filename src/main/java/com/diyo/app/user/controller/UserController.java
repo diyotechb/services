@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserController {
     @Autowired
     private UserService userService;
-    @PostMapping("/request")
+    @PostMapping("/create")
     public User createUser(@RequestParam(value = "firstName") String firstName,
                            @RequestParam(value = "middleName") String middleName,
                            @RequestParam(value = "lastName") String lastName,
@@ -26,6 +26,12 @@ public class UserController {
         request.setEmail(email);
         request.setPhoneNumber(phoneNumber);
         request.setResume(resume);
+        return userService.createUser(request);
+    }
+
+    @PostMapping("/applyJob")
+    public User submitJobApplication(@RequestPart("form") UserRequest request, @RequestPart("resume") MultipartFile file) {
+        request.setResume(file);
         return userService.createUser(request);
     }
 }
