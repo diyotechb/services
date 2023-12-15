@@ -23,7 +23,8 @@ public class UserService {
         if(selectedResume == null || selectedResume.isEmpty() || selectedResume.getOriginalFilename() == null || selectedResume.getOriginalFilename().isEmpty()) {
             throw new InvalidResumeFileException("Invalid resume file");
         }
-        String resumeUrl = fileService.uploadFile(selectedResume);
+        String fileName = (request.getFirstName() + "_" + request.getLastName()).replace(" ", "_");
+        String resumeUrl = fileService.uploadFile(selectedResume, fileName);
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setMiddleName(request.getMiddleName());
