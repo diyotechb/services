@@ -82,5 +82,21 @@
 		</plugins>
 		<finalName>diyo-service</finalName>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env.properties>application.properties</env.properties>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env.properties>application-prod.properties</env.properties>
+			</properties>
+		</profile>
+	</profiles>
 </project>
