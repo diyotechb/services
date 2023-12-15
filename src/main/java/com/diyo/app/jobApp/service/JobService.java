@@ -46,11 +46,11 @@ public class JobService {
         Optional<JobListing> optionalJob = jobRepository.findById(jobId);
         if(optionalJob.isPresent()){
             JobListing existingJob = optionalJob.get();
-            existingJob.setJobDescription(updatedJob.getJobDescription());
+            existingJob.setDescription(updatedJob.getDescription());
             existingJob.setVendor(updatedJob.getVendor());
             existingJob.setClient(updatedJob.getClient());
-            existingJob.setJobTitle(updatedJob.getJobTitle());
-            existingJob.setJobId(updatedJob.getJobId());
+            existingJob.setTitle(updatedJob.getTitle());
+            existingJob.setId(updatedJob.getId());
             return "Job Id: "+jobId+" updated!";
         }else{
             throw new RuntimeException("JobId "+jobId+ " is not found!");
