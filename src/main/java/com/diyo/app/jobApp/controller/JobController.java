@@ -1,7 +1,5 @@
 package com.diyo.app.jobApp.controller;
 
-
-
 import com.diyo.app.jobApp.entity.JobListing;
 import com.diyo.app.jobApp.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,57 +8,51 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/diyo")
+@RequestMapping("/api/jobs/")
 public class JobController {
     @Autowired
     JobService jobService;
 
     //READ ALL
-    @GetMapping("/getJobs")
+    @GetMapping("/all")
     public List<JobListing> getJobs(){
         return jobService.getAllJobs();
     }
 
     //READ ONE BY ID
-    @GetMapping("/getJobById/{jobId}")
-    public JobListing getJobById(@PathVariable Long jobId){
-        return jobService.getJobById(jobId);
+    @GetMapping("/{id}")
+    public JobListing getJobById(@PathVariable Long id){
+        return jobService.getJobById(id);
     }
 
     //SAVE ONE
-    @PostMapping("/saveJob")
+    @PostMapping("/save")
     public String saveJob(@RequestBody JobListing oneJob){
         return jobService.saveOneJob(oneJob);
     }
 
     //SAVE ALL
-    @PostMapping("/saveJobs")
+    @PostMapping("/saveAll")
     public String saveJobs(@RequestBody List<JobListing> allJobs){
         return jobService.saveAllJob(allJobs);
     }
 
     //UPDATE ONE
 
-    @PostMapping("/updateJobById/{jobId}")
-    public String updateJobById(@PathVariable Long jobId, @RequestBody JobListing jobListing){
-        return jobService.updateJobById(jobId, jobListing);
+    @PutMapping("/{id}")
+    public String updateJobById(@PathVariable Long id, @RequestBody JobListing jobListing){
+        return jobService.updateJobById(id, jobListing);
     }
 
     //DELETE ONE
-    @DeleteMapping("/deleteJobById/{jobId}")
-    public String deleteJobById(@PathVariable Long jobId){
-        return jobService.deleteById(jobId);
+    @DeleteMapping("/delete/{id}")
+    public String deleteJobById(@PathVariable Long id){
+        return jobService.deleteById(id);
     }
 
     //DELETE ALL
-    @DeleteMapping("/deleteJobs")
+    @DeleteMapping("/deleteAll")
     public String deleteJobs(){
         return jobService.deleteAll();
     }
-
-    @GetMapping("/test")
-    public String testGetMapping(){
-        return "test successful";
-    }
-
 }

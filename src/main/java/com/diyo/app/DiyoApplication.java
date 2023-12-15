@@ -12,6 +12,7 @@ public class DiyoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DiyoApplication.class, args);
 	}
+
 	@Bean
 	public WebMvcConfigurer corsConfigure(){
 		return new WebMvcConfigurer() {
@@ -21,5 +22,4 @@ public class DiyoApplication {
 			}
 		};
 	}
-
 }

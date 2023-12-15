@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class FileService {
@@ -28,9 +29,9 @@ public class FileService {
         this.s3Client = s3Client;
     }
 
-    public String uploadFile(MultipartFile file) {
+    public String uploadFile(MultipartFile file, String preferredFileName) {
         String folderPath = subFolder +"/";
-        String fileName = folderPath + generateFileName(file);
+        String fileName = folderPath + generateFileName(file, preferredFileName);
         String fileUrl = "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + fileName;
         try {
             ObjectMetadata metadata = new ObjectMetadata();
@@ -44,7 +45,14 @@ public class FileService {
         }
     }
 
-    private String generateFileName(MultipartFile file) {
-        return UUID.randomUUID().toString() + "_" + file.getOriginalFilename().replace(" ", "_");
+    private String generateFileName(MultipartFile file, String preferredFileName) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_hhmma");
+        String formattedDate = now.format(formatter);
+        String fileName = preferredFileName + "_" + formattedDate;
+        if (preferredFileName == null || preferredFileName.isEmpty()) {
+            fileName = file.getOriginalFilename() + "_" + formattedDate;
+        }
+        return fileName.replace(" ", "_").toLowerCase();
     }
 }

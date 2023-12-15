@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,14 +18,23 @@ import lombok.Setter;
 public class JobListing {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="job_id")
-    private Long jobId;
+    @Column(name="id")
+    private Long id;
 
-    @Column(name="job_title")
-    private String jobTitle;
+    @Column(name="title")
+    private String title;
 
-    @Column(name="job_description")
-    private String jobDescription;
+    @Column(name="description", length = 1000)
+    private String description;
+
+    @Column(name="location")
+    private String location;
+
+    @Column(name="requirements", length = 1000)
+    private String requirements;
+
+    @Column(name="instructions", length = 1000)
+    private String instructions;
 
     @Column(name="client")
     private String client;
@@ -31,4 +42,6 @@ public class JobListing {
     @Column(name="vendor")
     private String vendor;
 
+    @Column(name="deadline")
+    private LocalDateTime deadline;
 }
