@@ -1,4 +1,4 @@
-package com.diyo.app.user.entity;
+package com.diyo.app.jobApp.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 @Data
 @Builder
-public class UserRequest {
+public class JobApplicationRequest {
     @NotBlank
     private String firstName;
     private String middleName;
