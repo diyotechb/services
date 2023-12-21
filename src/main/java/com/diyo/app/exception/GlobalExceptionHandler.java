@@ -26,5 +26,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleInvalidResumeFileException(InvalidResumeFileException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
+
+    @ExceptionHandler(InvalidUserIdException.class)
+    public ResponseEntity<String> handleInvalidUserException(InvalidUserIdException invalid) {
+        return ResponseEntity.badRequest().body(invalid.getMessage());
+    }
 }
 

@@ -1,4 +1,4 @@
-package com.diyo.app.user.entity;
+package com.diyo.app.jobApp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,7 +11,7 @@ import lombok.*;
 @Data
 @Builder
 @Table(name="job_request")
-public class User {
+public class JobApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")

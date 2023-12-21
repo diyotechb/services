@@ -1,8 +1,8 @@
 package com.diyo.app.jobApp.service;
 
 
-import com.diyo.app.jobApp.entity.JobListing;
-import com.diyo.app.jobApp.repository.JobRepository;
+import com.diyo.app.jobApp.entity.JobPosting;
+import com.diyo.app.jobApp.repository.JobPostingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,19 +10,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class JobService {
+public class JobPostingService {
     @Autowired
-    JobRepository jobRepository;
+    JobPostingRepository jobPostingRepository;
 
 
     //READ ALL
-    public List<JobListing> getAllJobs(){
-        return jobRepository.findAll();
+    public List<JobPosting> getAllJobs(){
+        return jobPostingRepository.findAll();
     }
 
     //READ SPECIFIC BY ID
-    public JobListing getJobById(Long jobId){
-        Optional<JobListing> listing = jobRepository.findById(jobId);
+    public JobPosting getJobById(Long jobId){
+        Optional<JobPosting> listing = jobPostingRepository.findById(jobId);
         if(!listing.isPresent()){
             throw new RuntimeException("Listing with jobId "+jobId+ " is not present!");
         }
@@ -30,22 +30,22 @@ public class JobService {
     }
 
     //SAVE ONE JOB LISTING
-    public String saveOneJob(JobListing jobListing){
-        jobRepository.save(jobListing);
+    public String saveOneJob(JobPosting jobPosting){
+        jobPostingRepository.save(jobPosting);
         return "Successfully saved a job listing";
     }
 
     //SAVE ALL JOB LISTING
-    public String saveAllJob(List<JobListing> jobListingList){
-        jobRepository.saveAll(jobListingList);
+    public String saveAllJob(List<JobPosting> jobPostingList){
+        jobPostingRepository.saveAll(jobPostingList);
         return "Successfully saved all job listings";
     }
 
     //UPDATE BY ID
-    public String updateJobById(Long jobId, JobListing updatedJob){
-        Optional<JobListing> optionalJob = jobRepository.findById(jobId);
+    public String updateJobById(Long jobId, JobPosting updatedJob){
+        Optional<JobPosting> optionalJob = jobPostingRepository.findById(jobId);
         if(optionalJob.isPresent()){
-            JobListing existingJob = optionalJob.get();
+            JobPosting existingJob = optionalJob.get();
             existingJob.setDescription(updatedJob.getDescription());
             existingJob.setVendor(updatedJob.getVendor());
             existingJob.setClient(updatedJob.getClient());
@@ -59,9 +59,9 @@ public class JobService {
 
     //DELETE BY ID
     public String deleteById(Long jobId){
-        Optional<JobListing> optionalJobListing = jobRepository.findById(jobId);
+        Optional<JobPosting> optionalJobListing = jobPostingRepository.findById(jobId);
         if(optionalJobListing.isPresent()){
-            jobRepository.deleteById(jobId);
+            jobPostingRepository.deleteById(jobId);
             return jobId+" successfully deleted!";
         }
         else{
@@ -71,9 +71,9 @@ public class JobService {
 
     //DELETE ALL
     public String deleteAll(){
-        List<JobListing> job = jobRepository.findAll();
+        List<JobPosting> job = jobPostingRepository.findAll();
         int totalJob = job.size();
-        jobRepository.deleteAll();
+        jobPostingRepository.deleteAll();
         return totalJob+ " job listings deleted";
     }
 

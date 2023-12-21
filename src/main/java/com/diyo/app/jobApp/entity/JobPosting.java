@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 
 @Table(name="job_listing")
-public class JobListing {
+public class JobPosting {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="id")
