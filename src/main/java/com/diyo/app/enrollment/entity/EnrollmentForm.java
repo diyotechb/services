@@ -1,7 +1,9 @@
 package com.diyo.app.enrollment.entity;
 
+import com.diyo.app.enrollment.enums.Education;
 import com.diyo.app.enrollment.enums.Status;
 import com.diyo.app.enrollment.enums.Training;
+import com.diyo.app.enrollment.enums.WorkStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -41,23 +43,24 @@ public class EnrollmentForm {
 
     @NotBlank(message = "Date of Birth is required")
     @Column(name = "date_of_birth")
-    @Pattern(regexp = "^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/\\d{4}$", message = "Invalid date of birth, use MM/DD/YYYY format.")
     private String dateOfBirth;
 
     @Pattern(regexp = "^[0-9- ]+$", message = "Invalid phone number")
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @NotBlank(message = "Visa Status type is required")
-    @Column(name = "visa_status")
-    private String visaStatus;
+    @Enumerated(EnumType.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Column(name = "work_status")
+    private WorkStatus workStatus;
 
     @Column(name = "has_driver_license")
-    private boolean hasDriverLicense;
+    private String hasDriverLicense;
 
-    @NotBlank(message = "Education is required")
+    @Enumerated(EnumType.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Column(name = "education")
-    private String education;
+    private Education education;
 
     @NotBlank(message = "Institution name is required")
     @Column(name = "institution")
@@ -69,7 +72,6 @@ public class EnrollmentForm {
 
     @NotBlank(message = "Completion Date is required")
     @Column(name = "completion_date")
-    @Pattern(regexp = "^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/\\d{4}$", message = "Invalid date of birth, use MM/DD/YYYY format.")
     private String completionDate;
 
     @Column(name = "referral")
